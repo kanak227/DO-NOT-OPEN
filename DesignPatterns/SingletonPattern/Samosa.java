@@ -15,7 +15,9 @@ public class Samosa{
         if(samosa == null){
             // synchronized used to avoid multiple object creation at the time of threading
             synchronized(Samosa.class){
-                return new Samosa();
+                if (samosa == null) {
+                    samosa = new Samosa();
+                }
             }
         }
         return samosa;

@@ -9,7 +9,7 @@ public class main {
         Samosa samosa2 = Samosa.getSamosa();
         System.out.println(samosa2.hashCode());
 
-        System.out.println(Jalebi.getJalebi().getJalebi());
-        System.out.println(Jalebi.getJalebi().getJalebi());
+        System.out.println(Jalebi.getJalebi().hashCode());
+        System.out.println(Jalebi.getJalebi().hashCode());
     }
 }
