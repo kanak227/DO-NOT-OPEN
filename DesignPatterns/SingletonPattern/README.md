@@ -10,3 +10,15 @@ Issues:-
 2. Eager_way (Jalebi.java)
 Issues :-
 : Objects created when not needed to be -- not a good way makes software slow
+
+
+HOW TO BREAK SINGLETON PATTERN??
+
+1. using reflection API
+sol:- a. use enum
+      b. if object there , throw exception inside constructor
+
+2. deserialization
+sol:- implement readResolve method
+
+3. cloning
