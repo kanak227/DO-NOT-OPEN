@@ -1,0 +1,133 @@
+// Sample Problem Template and Analysis Guide
+
+/*
+PROBLEM SOLVING TEMPLATE
+
+Step 1: UNDERSTAND THE PROBLEM
+- Read problem statement carefully
+- Identify input/output format
+- Note all constraints (N, M, time limit, etc.)
+- Check for edge cases
+
+Step 2: THINK OF EXAMPLES
+- Work through the provided examples
+- Create your own test cases
+- Think of edge cases (N=0, N=1, large N, etc.)
+
+Step 3: DEVISE ALGORITHM
+- Brute force first (might be enough)
+- Optimize if TLE expected
+- Identify which algorithm/data structure fits
+
+Step 4: IMPLEMENT
+- Use appropriate template
+- Code carefully, test as you write
+- Add assertions for invariants
+
+Step 5: DEBUG & TEST
+- Test with provided examples
+- Test with edge cases
+- Check for integer overflow
+- Verify modulo operations
+*/
+
+/*
+EXAMPLE PROBLEM ANALYSIS
+
+Problem: Find the sum of elements in range [L, R]
+Constraints: 10^5 operations, N ≤ 10^5
+
+Approach 1: Direct iteration O(n) per query → Too slow if many queries
+Approach 2: Prefix sum O(1) per query after O(n) preprocessing → Good!
+Approach 3: Segment Tree O(log n) per query → Also good, more flexible
+
+Choice: Prefix sum (simpler and sufficient)
+
+Solution:
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(nullptr);
+    
+    int n;
+    cin >> n;
+    
+    vector<ll> prefix(n + 1, 0);
+    for(int i = 1; i <= n; i++){
+        int x;
+        cin >> x;
+        prefix[i] = prefix[i-1] + x;
+    }
+    
+    int q;
+    cin >> q;
+    while(q--){
+        int l, r;
+        cin >> l >> r;
+        cout << prefix[r] - prefix[l-1] << "\n";
+    }
+    
+    return 0;
+}
+```
+*/
+
+/*
+DEBUGGING CHECKLIST
+
+□ Integer overflow? Use long long
+□ Array bounds? Check 0-indexing vs 1-indexing
+□ Modulo operations? Take mod in intermediate steps
+□ Off-by-one errors? Check loop conditions
+□ Uninitialized variables? Initialize properly
+□ TLE issues? Check algorithm complexity vs constraints
+□ WA issues? Test with custom edge cases
+□ Working with negative numbers? Handle modulo carefully
+□ Graph directed vs undirected? Check problem statement
+*/
+
+/*
+TIME COMPLEXITY TARGETS
+
+N ≤ 10          → O(N!), O(N^6) is fine
+N ≤ 500         → O(N^3) is fine
+N ≤ 5000        → O(N^2) is needed
+N ≤ 10^5        → O(N log N) or O(N) is needed
+N ≤ 10^6        → O(N) is needed
+N ≤ 10^9        → O(log N) or O(1) is needed
+
+Also consider: Time per operation (1-2 nanoseconds per operation)
+Roughly: 10^8-10^9 simple operations per second
+*/
+
+/*
+COMMON PITFALLS & FIXES
+
+1. Integer Overflow
+   Problem: int a = 1e9; int b = 1e9; long long c = a * b;
+   Fix: long long c = (long long)a * b;
+
+2. Modulo with Subtraction
+   Problem: (a - b) % MOD might be negative
+   Fix: ((a - b) % MOD + MOD) % MOD;
+
+3. Array Indexing
+   Problem: Forgetting arrays are 0-indexed
+   Fix: Use 1-indexed if problem uses 1-indexing
+
+4. Division with Modulo
+   Problem: Can't directly divide with modulo
+   Fix: Multiply by modular inverse instead
+
+5. Floating Point Comparison
+   Problem: if (a == b) might fail due to precision
+   Fix: if (abs(a - b) < 1e-9)
+
+6. Unordered Map Hash Collisions
+   Problem: TLE due to hash collisions
+   Fix: Use map instead, or custom hash function
+*/
